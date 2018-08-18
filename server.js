@@ -1,17 +1,17 @@
-let mongoose = require('mongoose');
-let bodyParser = require('body-parser');
-let express = require('express');
-let expressHandlebars = require('express-handlebars');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const express = require('express');
+const expressHandlebars = require('express-handlebars');
 
 
 
 let PORT = process.env.PORT || 3000;
 
-let app = express();
+const app = express();
 
-let router = express.Router();
+const router = express.Router();
 
-
+require("./config/routes")(router);
 
 app.use(express.static(__dirname + "/public"));
 
@@ -30,7 +30,7 @@ app.use(router);
 
 let db = process.env.MONGODB_URI || "mongodb://heroku_lqxq33jc:8e4bj53lsgmdai9tmb26g0k1ao@ds125831.mlab.com:25831/heroku_lqxq33jc";
 
-mongoose.connect(db, function(error){
+mongoose.connect(db, (error) => {
   if (error) {
     console.log(error);
   }
@@ -39,6 +39,6 @@ mongoose.connect(db, function(error){
   }
 });
 
-app.listen(PORT, function(){
+app.listen(PORT, () => {
   console.log("listening on port:" + PORT);
 });
